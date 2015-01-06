@@ -15,7 +15,7 @@ entity read_data_stage is
 		a_out : out std_logic_vector(31 downto 0);
 		b_out : out std_logic_vector(31 downto 0);
 		c_out : out std_logic_vector(31 downto 0);
-		ubranch : out std_logic;
+		ubranch_out : out std_logic;
 		noop_out : out std_logic;
 		
 		r_addr_0	:	out std_logic_vector(31 downto 0);
@@ -26,6 +26,7 @@ end entity;
 
 architecture a1 of read_data_stage is
 --signals
+	signal ubranch : std_logic;
 --components
 begin
 	process(clk, reset_n) begin

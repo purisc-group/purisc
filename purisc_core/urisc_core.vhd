@@ -69,7 +69,7 @@ architecture arch of urisc_core is
 				a_out : out std_logic_vector(31 downto 0);
 				b_out : out std_logic_vector(31 downto 0);
 				c_out : out std_logic_vector(31 downto 0);
-				ubranch : out std_logic;
+				ubranch_out : out std_logic;
 				noop_out : out std_logic;
 				
 				r_addr_0	:	out std_logic_vector(31 downto 0);

@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity urisc is
+entity purisc is
 	port(
 		clk, reset_n : in std_logic;
 		--memory mapped IO
@@ -15,7 +15,7 @@ entity urisc is
 	);
 end entity;
 
-architecture bhv of urisc is
+architecture bhv of purisc is
 	signal 	r_addr_0, r_addr_1, r_addr_inst, 
 				w_data, w_addr,
 				r_data_a, r_data_b, r_data_c, 
