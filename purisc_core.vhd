@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity urisc_core is
+entity purisc_core is
 	port(
 		clk, reset_n : in std_logic;
 		r_addr_0, r_addr_1, r_addr_inst : out std_logic_vector(31 downto 0);
@@ -14,7 +14,7 @@ entity urisc_core is
 	);
 end entity;
 
-architecture arch of urisc_core is
+architecture arch of purisc_core is
 		--ri output signals
 		signal ri_a : std_logic_vector(31 downto 0);
 		signal ri_next_pc : std_logic_vector(31 downto 0);

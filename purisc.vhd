@@ -7,6 +7,7 @@ entity purisc is
 		clk, reset_n : in std_logic;
 		--memory mapped IO
 		data_output : out std_logic_vector(31 downto 0);
+		o_en			: out std_logic;
 		data_input	: in std_logic_vector(31 downto 0);
 		--for loading memory
 		w_override	: in std_logic;
@@ -32,7 +33,7 @@ architecture bhv of purisc is
 	
 	signal b,c : unsigned(31 downto 0);
 	
-	component urisc_core
+	component purisc_core
 		port(
 			clk, reset_n : in std_logic;
 			r_addr_0, r_addr_1, r_addr_inst : out std_logic_vector(31 downto 0);
@@ -65,8 +66,24 @@ architecture bhv of purisc is
 			data_1 	: out std_logic_vector(31 downto 0)
 		);
 	end component;
+	component io_controller
+		generic (
+			input_location			:	std_logic_vector(31 downto 0);
+			output_location		:	std_logic_vector(31 downto 0);
+			output_flag_location	:	std_logic_vector(31 downto 0)
+		);
+		port (
+			clk, reset_n			:	in std_logic;
+			-- for watching the CPU's writes
+			w_data, w_addr			:	in std_logic_vector(31 downto 0);
+			w_en						:	in std_logic;
+			-- output to ethernet controller
+			data_out					:	out std_logic_vector(31 downto 0);
+			o_en						:	out std_logic
+		);
+	end component;
 begin
-	uc : urisc_core port map(
+	uc : purisc_core port map(
 		clk => clk,
 		reset_n  => reset_n_core,
 		r_addr_0 => r_addr_0,
@@ -83,6 +100,17 @@ begin
 		r_data_0 => r_data_0,
 		r_data_1 => r_data_1
 	);
+	ioc : io_controller 
+		generic map(
+			"00000000000000000000000000000000", --input memory location: 0 (not implemented yet)
+			"00000000000000000000000011111111", --output memory loaction:			255
+			"00000000000000000000000100000000"	--output flag memory location:	256
+		)
+		port map (
+			clk, reset_n,
+			w_data, w_addr, we,
+			data_output, o_en
+		);
 	mc : magic port map(
 		clk => clk,
 		reset_n => reset_n,
@@ -115,4 +143,3 @@ begin
 	reset_n_core <= '0' when w_override = '1' else reset_n;
 	
 end architecture;
-
