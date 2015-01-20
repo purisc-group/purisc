@@ -44,6 +44,11 @@ end;
 
 architecture CACHE of RAMS is
 
+	TYPE STATE_TYPE IS (H_N, H_Y);
+	SIGNAL state : STATE_TYPE;
+
+	signal OPCODE_RET_BUFFERED : std_logic_vector (5 downto 0) := "000000";
+	signal OPCODE_RET_SIG : std_logic_vector(5 downto 0) := "000000";
 	signal OPCODE_SIG	: std_logic_vector(5 downto 0):= "000000";
 
 	signal WRITE_DATA : std_logic_vector(64 downto 0);
@@ -67,7 +72,8 @@ architecture CACHE of RAMS is
 --write enables
 	signal wren_a : std_logic := '0';
 	signal wren_b : std_logic := '0';
-	
+
+--read enables	
 	signal rden_a : std_logic := '1';
 	signal rden_b : std_logic := '1';
 
@@ -218,7 +224,40 @@ architecture CACHE of RAMS is
 													sel => sel_W_1,
 													my_out => addr_b
 													);
-
+--***********************************'
+--HAZARD RESOLUTION
+--***********************************
+--	process (clock_base, RESET_n, OPCODE_RET_SIG) begin
+--		if (RESET_n = '0') then
+--			state <= H_N;
+--		elsif (rising_edge(clock_base)) then
+--			case state is
+--				when H_N =>
+--					if (OPCODE_RET_SIG = "000000") then
+--						state <= H_N;
+--					else
+--						OPCODE_RET_BUFFERED <= OPCODE_RET_SIG;
+--						state <= H_Y;
+--					end if;
+--				when H_Y =>
+--					if (OPCODE_RET_BUFFERED = "000000") then 
+--						state <= H_N;	
+--					else
+--						OPCODE_RET_BUFFERED <= OPCODE_RET_SIG;
+--						state <= H_Y;
+--					end if;
+--			end case;
+--		end if;
+--	end process;
+--	
+--	process (state, OPCODE, OPCODE_RET_BUFFERED) begin
+--		case state is
+--			when H_N =>
+--				OPCODE_SIG <= OPCODE;
+--			when H_Y =>
+--				OPCODE_SIG <= OPCODE_RET_BUFFERED;
+--		end case;
+--	end process;
 --***********************************
 --ASYNC SIGNALS 
 --***********************************
@@ -288,8 +327,10 @@ architecture CACHE of RAMS is
 		STALL <= (OPCODE_SIG(4) xor (sel_B_0 or sel_B_1)) or (OPCODE_SIG(3) xor (sel_C_0 or sel_C_1)) or
 					(OPCODE_SIG(2) xor (sel_D_0 or sel_D_1)) or (OPCODE_SIG(1) xor (sel_E_0 or sel_E_1));
 		
-		OPCODE_RET <= ('0') & (OPCODE_SIG(4) xor (sel_B_0 or sel_B_1)) & (OPCODE_SIG(3) xor (sel_C_0 or sel_C_1)) & 
+		OPCODE_RET_SIG <= ('0') & (OPCODE_SIG(4) xor (sel_B_0 or sel_B_1)) & (OPCODE_SIG(3) xor (sel_C_0 or sel_C_1)) & 
 							(OPCODE_SIG(2) xor (sel_D_0 or sel_D_1)) & (OPCODE_SIG(1) xor (sel_E_0 or sel_E_1)) & ('0');
+							
+		OPCODE_RET <= OPCODE_RET_SIG;
 		OPCODE_SIG <= OPCODE;
 		OUTPUT_0 <= read_data_a;
 		OUTPUT_1 <= read_data_b;

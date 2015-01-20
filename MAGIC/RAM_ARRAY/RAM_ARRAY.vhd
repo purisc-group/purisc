@@ -37,19 +37,7 @@ entity RAM_ARRAY is
 			OPCODE_4_IN : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
 			OPCODE_5_IN : IN STD_LOGIC_VECTOR(5 DOWNTO 0);
 			--STALLING
-			WAIT_FLAG : OUT STD_LOGIC;
-			STALL_0_OUT : OUT STD_LOGIC;
-			STALL_1_OUT : OUT STD_LOGIC;
-			STALL_2_OUT : OUT STD_LOGIC;
-			STALL_3_OUT : OUT STD_LOGIC;
-			STALL_4_OUT : OUT STD_LOGIC;
-			STALL_5_OUT : OUT STD_LOGIC;
-			OP_0_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-			OP_1_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-			OP_2_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-			OP_3_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-			OP_4_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
-			OP_5_RET : OUT STD_LOGIC_VECTOR(5 DOWNTO 0)
+			WAIT_FLAG : OUT STD_LOGIC
 			);
 end RAM_ARRAY;
 
@@ -700,14 +688,14 @@ architecture ram_connect of RAM_ARRAY is
 		sel_E41 <= control_e(1) and not SEL_E_4;
 		sel_E50 <= control_e(0) and SEL_E_5;
 		sel_E51 <= control_e(0) and not SEL_E_5;
-		
+
 		serviced_0 <= OPCODE_0_IN xor op_0_out;
 		serviced_1 <= OPCODE_1_IN xor op_1_out;
 		serviced_2 <= OPCODE_2_IN xor op_2_out;
 		serviced_3 <= OPCODE_3_IN xor op_3_out;
 		serviced_4 <= OPCODE_4_IN xor op_4_out;
 		serviced_5 <= OPCODE_5_IN xor op_5_out;
-		
+
 		control_a <= serviced_0(5)&serviced_1(5)&serviced_2(5)&serviced_3(5)&serviced_4(5)&serviced_5(5);
 		control_b <= serviced_0(4)&serviced_1(4)&serviced_2(4)&serviced_3(4)&serviced_4(4)&serviced_5(4);
 		control_c <= serviced_0(3)&serviced_1(3)&serviced_2(3)&serviced_3(3)&serviced_4(3)&serviced_5(3);
@@ -715,20 +703,6 @@ architecture ram_connect of RAM_ARRAY is
 		control_e <= serviced_0(1)&serviced_1(1)&serviced_2(1)&serviced_3(1)&serviced_4(1)&serviced_5(1);
 		
 		WAIT_FLAG <= stall_0 or stall_1 or stall_2 or stall_3 or stall_4 or stall_5;
-		
-		STALL_0_OUT <= stall_0;
-		STALL_1_OUT <= stall_1;
-		STALL_2_OUT <= stall_2;
-		STALL_3_OUT <= stall_3;
-		STALL_4_OUT <= stall_4;
-		STALL_5_OUT <= stall_5;
-		
-		OP_0_RET <= op_0_out;
-		OP_1_RET <= op_1_out;
-		OP_2_RET <= op_2_out;
-		OP_3_RET <= op_3_out;
-		OP_4_RET <= op_4_out;
-		OP_5_RET <= op_5_out;
 		
 		OUTPUT_A <= OUT_A_SIG;
 		OUTPUT_B <= OUT_B_SIG;
