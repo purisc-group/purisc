@@ -7,7 +7,7 @@ entity purisc_core is
 		r_addr_0, r_addr_1, r_addr_inst : out std_logic_vector(31 downto 0);
 		w_data, w_addr :	out std_logic_vector(31 downto 0);
 		we	:	out std_logic;
-		hit : in std_logic;
+		stall : in std_logic;
 		flags	: in std_logic_vector(7 downto 0);
 		r_data_a, r_data_b, r_data_c, 
 		r_data_0, r_data_1	: 	in	std_logic_vector(31 downto 0)
@@ -118,7 +118,7 @@ architecture arch of purisc_core is
 	
 	ri : read_instruction_stage  port map (
 		--in
-		clk, reset_n, not hit,
+		clk, reset_n, stall,
 		ex_cbranch,ex_c,
 		rd_ubranch,rd_c,
 		ri_next_pc,
@@ -126,7 +126,7 @@ architecture arch of purisc_core is
 	);
 	rd : read_data_stage port map (
 		--inputs
-		clk, reset_n, not hit, rd_ubranch or ex_cbranch,
+		clk, reset_n, stall, rd_ubranch or ex_cbranch,
 		r_data_a, r_data_b, r_data_c, 
 		ri_next_pc,
 		--outputs
@@ -137,7 +137,7 @@ architecture arch of purisc_core is
 	);
 	ex : execute_stage port map (
 		--inputs
-		clk, reset_n, not hit,
+		clk, reset_n, stall,
 		rd_a, rd_b, rd_c, ex_da_in, ex_db_in, 
 		rd_next_pc,
 		rd_noop or ex_cbranch, 
@@ -146,7 +146,7 @@ architecture arch of purisc_core is
 	);
 	wd	: write_data_stage port map (
 		--inputs
-		clk, reset_n, not hit,
+		clk, reset_n, stall,
 		ex_b, ex_db, ex_noop, 
 		--memory
 		wd_data, wd_addr, we

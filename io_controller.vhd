@@ -8,9 +8,10 @@ use ieee.numeric_std.all;
 --designated IO region.
 --
 --The CPU can output data with the folowing sequence
---1) change the value in the "output flag" memory location
---2) clear the data stored at the "output" memory location
---3) write the data to the "output" memory location
+--[0)(optional)] clear the memory location before writing (this technically doesn't matter to the io controller)
+--1) write anything to the "output flag" memory location
+--2) write the data to the "output" memory location
+--3) write the pointer to the "output" memory location
 --
 --When the CPU reads data from the "input" location, it is automatically 
 --detected by the IO controller and the value is updated
@@ -27,7 +28,8 @@ entity io_controller is
 		-- for watching the CPU's writes
 		w_data, w_addr			:	in std_logic_vector(31 downto 0);
 		w_en						:	in std_logic;
-		data_out					:	out std_logic_vector(31 downto 0);
+		--for outputting data
+		data_out, ptr_out		:	out std_logic_vector(31 downto 0);
 		o_en						:	out std_logic
 	);
 
@@ -35,11 +37,10 @@ end entity;
 
 architecture ioc of io_controller is
 	--fsm signals
-	type ofsm_state_type is (swait, stoggled, soutput, swtf);
+	type ofsm_state_type is (swait, sptr, sdata, swtf);
 	signal ostate 				:	ofsm_state_type := swait;
-	signal w_data_last		:	std_logic_vector(31 downto 0);
 	--datapath signals
-	signal 	oflag_toggle,
+	signal 	oflag_writing,
 				cpu_writing		:	std_logic;
 begin
     process(clk, reset_n)
@@ -49,30 +50,24 @@ begin
 		elsif (rising_edge(clk)) then
 		--update state
 			if ostate = swait then
-				if oflag_toggle = '1' and cpu_writing = '1' then
-					ostate <= soutput;
+				if oflag_writing = '1' then
+					ostate <= sdata;
 				else
 					ostate <= swait;
 				end if;
-			elsif ostate = soutput then
-				if oflag_toggle = '1' and cpu_writing = '1' then
-					ostate <= soutput;
-				else
-					ostate <= swait;
-				end if;
+			elsif ostate = sdata then
+				ostate <= sptr;
+			elsif ostate = sptr then
+				ostate <= swait;
 			else
 				ostate <= swtf;
 			end if;
 		end if;
-		
-		w_data_last <= w_data;
-		
 	end process;
 	
 	--datapath
 	process(ostate, w_data, w_addr)
 	begin
-	
 		-- is the CPU writing to its output reg?
 		if w_addr = output_location then
 			cpu_writing <= '1';
@@ -80,20 +75,22 @@ begin
 			cpu_writing <= '0';
 		end if;
 		
-		-- has the output flag been changed?
-		if w_addr = output_flag_location and not(w_data_last = w_data) then
-			oflag_toggle <= '1';
+		-- is the cpu writing to the output flag?
+		if w_addr = output_flag_location then
+			oflag_writing <= '1';
 		else
-			oflag_toggle <= '0';
+			oflag_writing <= '0';
 		end if;
 		
-		-- should we be outputting something right now?
-		if ostate = soutput then
+		-- should we be outputting data right now?
+		if ostate = sdata then
 			data_out <= w_data;
+		elsif ostate = sptr then
 			o_en <= '1';
+			ptr_out <= w_data;
 		else
-			--hold previous data_output
 			o_en <= '0';
+			--hold previous pointer and data outputs
 		end if;
 	end process;
 end architecture;

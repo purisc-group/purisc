@@ -29,6 +29,8 @@ architecture a1 of read_data_stage is
 	signal ubranch : std_logic;
 --components
 begin
+	ubranch_out <= ubranch;
+	
 	process(clk, reset_n) begin
 		if (reset_n = '0') then
 			--on boot
