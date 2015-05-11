@@ -18,7 +18,7 @@ architecture a1 of testbench is
 	signal data_output, data_input, o_w_addr, o_w_data : std_logic_vector(31 downto 0) := "00000000000000000000000000000000";
 	signal w_override : std_logic;
 	--components
-	component urisc
+	component purisc
 		port(
 			clk, reset_n : in std_logic;
 			--memory mapped IO
@@ -31,7 +31,7 @@ architecture a1 of testbench is
 		);
 	end component;
 begin
-	u : urisc port map(
+	u : purisc port map(
 		clk, reset_n,
 		data_output,data_input,
 		w_override, o_w_addr, o_w_data
@@ -50,11 +50,11 @@ begin
 			--inst0
 elsif(state = 2) then
 	o_w_addr	<=	"00000000000000000000000000000000"; --location:	0
-	o_w_data	<=	"00000000000000000000000001010001"; --value:		81
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 3;
 elsif(state = 3) then
 	o_w_addr	<=	"00000000000000000000000000000001"; --location:	1
-	o_w_data	<=	"00000000000000000000000001010001"; --value:		81
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 4;
 elsif(state = 4) then
 	o_w_addr	<=	"00000000000000000000000000000010"; --location:	2
@@ -62,7 +62,7 @@ elsif(state = 4) then
 	state <= 5;
 elsif(state = 5) then
 	o_w_addr	<=	"00000000000000000000000000000011"; --location:	3
-	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
+	o_w_data	<=	"00000000000000000000000000111110"; --value:		62
 	state <= 6;
 elsif(state = 6) then
 	o_w_addr	<=	"00000000000000000000000000000100"; --location:	4
@@ -74,11 +74,11 @@ elsif(state = 7) then
 	state <= 8;
 elsif(state = 8) then
 	o_w_addr	<=	"00000000000000000000000000000110"; --location:	6
-	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
+	o_w_data	<=	"00000000000000000000000001000010"; --value:		66
 	state <= 9;
 elsif(state = 9) then
 	o_w_addr	<=	"00000000000000000000000000000111"; --location:	7
-	o_w_data	<=	"00000000000000000000000001000010"; --value:		66
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 10;
 elsif(state = 10) then
 	o_w_addr	<=	"00000000000000000000000000001000"; --location:	8
@@ -86,11 +86,11 @@ elsif(state = 10) then
 	state <= 11;
 elsif(state = 11) then
 	o_w_addr	<=	"00000000000000000000000000001001"; --location:	9
-	o_w_data	<=	"00000000000000000000000000000111"; --value:		7
+	o_w_data	<=	"00000000000000000000000000111110"; --value:		62
 	state <= 12;
 elsif(state = 12) then
 	o_w_addr	<=	"00000000000000000000000000001010"; --location:	10
-	o_w_data	<=	"00000000000000000000000001010000"; --value:		80
+	o_w_data	<=	"00000000000000000000000000111110"; --value:		62
 	state <= 13;
 elsif(state = 13) then
 	o_w_addr	<=	"00000000000000000000000000001011"; --location:	11
@@ -98,11 +98,11 @@ elsif(state = 13) then
 	state <= 14;
 elsif(state = 14) then
 	o_w_addr	<=	"00000000000000000000000000001100"; --location:	12
-	o_w_data	<=	"00000000000000000000000001000001"; --value:		65
+	o_w_data	<=	"00000000000000000000000001000010"; --value:		66
 	state <= 15;
 elsif(state = 15) then
 	o_w_addr	<=	"00000000000000000000000000001101"; --location:	13
-	o_w_data	<=	"00000000000000000000000001010000"; --value:		80
+	o_w_data	<=	"00000000000000000000000000111111"; --value:		63
 	state <= 16;
 elsif(state = 16) then
 	o_w_addr	<=	"00000000000000000000000000001110"; --location:	14
@@ -110,11 +110,11 @@ elsif(state = 16) then
 	state <= 17;
 elsif(state = 17) then
 	o_w_addr	<=	"00000000000000000000000000001111"; --location:	15
-	o_w_data	<=	"00000000000000000000000000000111"; --value:		7
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 18;
 elsif(state = 18) then
 	o_w_addr	<=	"00000000000000000000000000010000"; --location:	16
-	o_w_data	<=	"00000000000000000000000000000111"; --value:		7
+	o_w_data	<=	"00000000000000000000000000111110"; --value:		62
 	state <= 19;
 elsif(state = 19) then
 	o_w_addr	<=	"00000000000000000000000000010001"; --location:	17
@@ -122,23 +122,23 @@ elsif(state = 19) then
 	state <= 20;
 elsif(state = 20) then
 	o_w_addr	<=	"00000000000000000000000000010010"; --location:	18
-	o_w_data	<=	"00000000000000000000000001010000"; --value:		80
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 21;
 elsif(state = 21) then
 	o_w_addr	<=	"00000000000000000000000000010011"; --location:	19
-	o_w_data	<=	"00000000000000000000000000000111"; --value:		7
+	o_w_data	<=	"00000000000000000000000001000000"; --value:		64
 	state <= 22;
 elsif(state = 22) then
 	o_w_addr	<=	"00000000000000000000000000010100"; --location:	20
-	o_w_data	<=	"00000000000000000000000000010101"; --value:		21
+	o_w_data	<=	"00000000000000000000000000000011"; --value:		3
 	state <= 23;
 elsif(state = 23) then
 	o_w_addr	<=	"00000000000000000000000000010101"; --location:	21
-	o_w_data	<=	"00000000000000000000000001010000"; --value:		80
+	o_w_data	<=	"00000000000000000000000001000101"; --value:		69
 	state <= 24;
 elsif(state = 24) then
 	o_w_addr	<=	"00000000000000000000000000010110"; --location:	22
-	o_w_data	<=	"00000000000000000000000001010000"; --value:		80
+	o_w_data	<=	"00000000000000000000000001000101"; --value:		69
 	state <= 25;
 elsif(state = 25) then
 	o_w_addr	<=	"00000000000000000000000000010111"; --location:	23
@@ -146,15 +146,15 @@ elsif(state = 25) then
 	state <= 26;
 elsif(state = 26) then
 	o_w_addr	<=	"00000000000000000000000000011000"; --location:	24
-	o_w_data	<=	"00000000000000000000000001010001"; --value:		81
+	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
 	state <= 27;
 elsif(state = 27) then
 	o_w_addr	<=	"00000000000000000000000000011001"; --location:	25
-	o_w_data	<=	"00000000000000000000000001010001"; --value:		81
+	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
 	state <= 28;
 elsif(state = 28) then
 	o_w_addr	<=	"00000000000000000000000000011010"; --location:	26
-	o_w_data	<=	"00000000000000000000000000000011"; --value:		3
+	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
 	state <= 29;
 elsif(state = 29) then
 	o_w_addr	<=	"00000000000000000000000000011011"; --location:	27
@@ -314,68 +314,25 @@ elsif(state = 67) then
 	state <= 68;
 elsif(state = 68) then
 	o_w_addr	<=	"00000000000000000000000001000010"; --location:	66
-	o_w_data	<=	"11111111111111111111111110101010"; --value:		-86
+	o_w_data	<=	"00000000000000000000000000000001"; --value:		1
 	state <= 69;
 elsif(state = 69) then
 	o_w_addr	<=	"00000000000000000000000001000011"; --location:	67
-	o_w_data	<=	"11111111111111111111111110011111"; --value:		-97
+	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
 	state <= 70;
 elsif(state = 70) then
 	o_w_addr	<=	"00000000000000000000000001000100"; --location:	68
-	o_w_data	<=	"11111111111111111111111110011001"; --value:		-103
+	o_w_data	<=	"00000000000000000000000001100100"; --value:		100
 	state <= 71;
 elsif(state = 71) then
 	o_w_addr	<=	"00000000000000000000000001000101"; --location:	69
-	o_w_data	<=	"11111111111111111111111110010111"; --value:		-105
+	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
 	state <= 72;
 elsif(state = 72) then
 	o_w_addr	<=	"00000000000000000000000001000110"; --location:	70
-	o_w_data	<=	"11111111111111111111111110010010"; --value:		-110
-	state <= 73;
-elsif(state = 73) then
-	o_w_addr	<=	"00000000000000000000000001000111"; --location:	71
-	o_w_data	<=	"11111111111111111111111110011111"; --value:		-97
-	state <= 74;
-elsif(state = 74) then
-	o_w_addr	<=	"00000000000000000000000001001000"; --location:	72
-	o_w_data	<=	"11111111111111111111111111011111"; --value:		-33
-	state <= 75;
-elsif(state = 75) then
-	o_w_addr	<=	"00000000000000000000000001001001"; --location:	73
-	o_w_data	<=	"11111111111111111111111110101010"; --value:		-86
-	state <= 76;
-elsif(state = 76) then
-	o_w_addr	<=	"00000000000000000000000001001010"; --location:	74
-	o_w_data	<=	"11111111111111111111111110011111"; --value:		-97
-	state <= 77;
-elsif(state = 77) then
-	o_w_addr	<=	"00000000000000000000000001001011"; --location:	75
-	o_w_data	<=	"11111111111111111111111110011001"; --value:		-103
-	state <= 78;
-elsif(state = 78) then
-	o_w_addr	<=	"00000000000000000000000001001100"; --location:	76
-	o_w_data	<=	"11111111111111111111111110010111"; --value:		-105
-	state <= 79;
-elsif(state = 79) then
-	o_w_addr	<=	"00000000000000000000000001001101"; --location:	77
-	o_w_data	<=	"11111111111111111111111110010010"; --value:		-110
-	state <= 80;
-elsif(state = 80) then
-	o_w_addr	<=	"00000000000000000000000001001110"; --location:	78
-	o_w_data	<=	"11111111111111111111111110011111"; --value:		-97
-	state <= 81;
-elsif(state = 81) then
-	o_w_addr	<=	"00000000000000000000000001001111"; --location:	79
-	o_w_data	<=	"11111111111111111111111111011111"; --value:		-33
-	state <= 82;
-elsif(state = 82) then
-	o_w_addr	<=	"00000000000000000000000001010000"; --location:	80
-	o_w_data	<=	"00000000000000000000000000000000"; --value:		0
-	state <= 83;
-elsif(state = 83) then
-	o_w_addr	<=	"00000000000000000000000001010001"; --location:	81
 	o_w_data	<=	"00000000000000000000000000000101"; --value:		5
-	state <= 84;
+	state <= 73;
+
 			else
 				w_override <= '0';
 			end if;
@@ -385,6 +342,6 @@ elsif(state = 83) then
 	process
 	begin
 		clk <= not clk;
-		wait for 20ns;
+		wait for 5ns;
 	end process;
 end architecture;
