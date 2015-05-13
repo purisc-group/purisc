@@ -2,11 +2,16 @@
 Pipelined/Purist Ultimate Reduced Instruction Set Computer - a single 
 instruction 8 core coprocessor system.
 
-##Intro
-This project consists of a system centered around several single instruction
-CPUs. It includes many components other than the one instruction CPU, such as
-memory management and ethernet IO. For more information about the design,
-please refer to the wiki.
+This project consists of a system-on-chip prototype intended to demonstrate an
+8 core implementation of a pipelined one-instruction machine. The system
+includes, in addition to the 8 CPUs, hardware for controlling memory access and
+ethernet IO. Other git repos by the purisc group provide host-side software for
+compiling one-instruction programs, communicating with the board, and other
+scripts useful for development
+
+For more details on the design and the role of each component, please refer to
+the documentation at
+https://github.com/purisc-group/purisc/wiki
 
 ##Hardware
 This project was designed for the Altera DE2-115 development board, and is not
@@ -16,4 +21,6 @@ been added to the repo (the RAM modules have been removed).
 
 ##Simulation
 PURISC is written in SystemVerilog, Verilog, and VHDL. A program that supports
-muli-language simulation must be used to simulate it. 
+muli-language simulation must be used to simulate it. Components have their own
+testbenches, but to test the entire project, use the testbench in the project
+root directory.
