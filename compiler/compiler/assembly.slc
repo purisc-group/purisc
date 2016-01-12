@@ -1,0 +1,83 @@
+DATA_MEM:
+a: #4
+0: #2
+c: #0
+b: #15
+e: #0
+d: #0
+1: #6
+2: #4
+one: #1
+
+PROGRAM_MEM:
+//%c = add i32 %a,@b
+c c NEXT
+t1 t1 NEXT
+%a t1 NEXT
+@b t1 NEXT
+t1 c NEXT
+//%d=sub i32     %a,@b 
+d d NEXT
+t1 t1 NEXT
+%a t1 NEXT
+@b d NEXT
+t1 d NEXT
+//%e   =mul i32 %a  ,   @b
+counter counter NEXT
+adder adder NEXT
+t1 t1 NEXT
+t2 t2 NEXT
+%a t1 apos
+t1 adder NEXT
+@b t2 bpos
+bneg: t2 counter NEXT
+t3 t3 continue
+bpos: %a adder NEXT
+t3 t3 continue
+apos: %a adder NEXT
+t1 t1 NEXT
+@b t1 bpos
+@b t2 NEXT
+t3 t3 bneg
+continue: one counter NEXT
+tempC tempC NEXT
+again: adder tempC NEXT
+one counter again
+e e NEXT
+tempC e NEXT
+//%a = add i32 2,%a
+a a NEXT
+t1 t1 NEXT
+0 t1 NEXT
+%a t1 NEXT
+t1 a NEXT
+//@b = sub i32 @b, 6
+b b NEXT
+t1 t1 NEXT
+@b t1 NEXT
+1 b NEXT
+t1 b NEXT
+//%a = mul i32 %a,4
+counter counter NEXT
+adder adder NEXT
+t1 t1 NEXT
+t2 t2 NEXT
+%a t1 apos
+t1 adder NEXT
+2 t2 bpos
+bneg: t2 counter NEXT
+t3 t3 continue
+bpos: %a adder NEXT
+t3 t3 continue
+apos: %a adder NEXT
+t1 t1 NEXT
+2 t1 bpos
+2 t2 NEXT
+t3 t3 bneg
+continue: one counter NEXT
+tempC tempC NEXT
+again: adder tempC NEXT
+one counter again
+a a NEXT
+tempC a NEXT
+

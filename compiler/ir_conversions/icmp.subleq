@@ -1,0 +1,75 @@
+//equals A,B->C
+
+	C  C  NEXT
+	t0 t0 NEXT
+	A t0 NEXT
+	t0 C NEXT
+	B C possibleEq
+	C C done
+possibleEq: t1,t1,NEXT
+	C t1 eq
+	C C done
+	eq: t1 C NEXT
+	done: t0 t0 NEXT
+
+
+//not equal A,B->C
+
+	C C NEXT
+	A C NEXT
+	B C NEXT
+
+
+//signed greater than A,B-C
+
+    C C NEXT
+    t0 t0 NEXT
+    A t0 NEXT
+    t0 C NEXT
+    B C less
+    t1 t1 done
+less: C C NEXT
+done: t3 t3 NEXT	
+
+
+//signed greater than or equal A,B->C
+
+program_mem:
+    C C NEXT
+    negOne C NEXT
+    t0 t0 NEXT
+    A t0 NEXT
+    t0 C NEXT
+    B C less
+    t1 t1 done
+less: C C NEXT
+done: t3 t3 NEXT
+
+data_mem:
+	negOne : #-1
+
+
+//signed less than A,B->C
+
+    C C NEXT
+    t0 t0 NEXT
+    B t0 NEXT
+    t0 C NEXT
+    A C less
+    t1 t1 done
+less: C C NEXT
+done: t3 t3 NEXT
+
+
+//signed less than or equal A,B->C
+
+program_mem:
+	C C NEXT
+	negOne C NEXT
+	t0 t0 NEXT
+	B t0 NEXT
+	t0 C NEXT
+	A C less
+	t1 t1 done
+less: C C NEXT
+done: t3 t3 NEXT

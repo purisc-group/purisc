@@ -1,0 +1,11 @@
+//ADD A,B->C:
+	C,C,NEXT
+	t0,t0,NEXT
+	A,t0,NEXT
+	B,t0,NEXT
+	t0,C,NEXT
+
+//SUB A,B->C
+	C,C,NEXT
+	B,C,NEXT
+	A,C,NEXT

@@ -1,0 +1,35 @@
+/* welcome to my shit program 
+   it counts. 
+   syntax is inconsistent for testing purposes
+*/
+
+top:    a0      a0      NEXT
+        counter a0      NEXT
+        one     a0      NEXT
+        counter counter 12
+12:     a0      counter NEXT
+15:     a0      a0      top
+
+
+
+
+#DATA_MEM
+/* Some initial values for data memory - the assembler will convert these to 
+   numerical addresses. You can specify a numerical label to tell the assembler
+   to use that specific address for your value.*/
+zero:   0
+one:    1
+two:    2
+four:   4
+eight:  8
+sixteen:16
+a0:     0
+a1:     0
+a2:     0
+a3:     0
+counter:0
+output: 0
+0
+0
+0
+0
