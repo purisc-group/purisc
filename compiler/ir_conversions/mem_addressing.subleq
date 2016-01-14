@@ -1,0 +1,9 @@
+//store
+//store i32 A, i32* %B
+	B B NEXT
+	A B NEXT
+
+//load
+//%B = load i32* %A 
+	B B NEXT
+	A B NEXT

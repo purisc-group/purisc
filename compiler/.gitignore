@@ -1,0 +1,12 @@
+input*
+implemented_ir.notes
+output*
+program_memory.mem
+random
+sim.py
+demo.sh
+*.pyc
+*.swp
+test*
+*.jpg
+*.swo

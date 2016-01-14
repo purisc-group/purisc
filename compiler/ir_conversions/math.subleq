@@ -1,0 +1,14 @@
+//abd |A|->C
+program_mem:
+	C C NEXT
+	t0 t0 NEXT
+	A t0 neg
+	t0 C done
+neg: max t0 NEXT
+	negOne C NEXT
+	t0 C NEXT
+done: t0 t0 NEXT //dummy
+
+data_mem:
+	negOne: -1
+	max: 4294967295

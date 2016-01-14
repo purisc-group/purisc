@@ -1,0 +1,7 @@
+//shl A < 1 -> C
+	C C NEXT
+	t0 t0 NEXT
+	A t0 NEXT
+	C t0 NEXT
+	A t0 NEXT
+	t0 C NEXT

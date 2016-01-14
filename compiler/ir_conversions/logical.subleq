@@ -1,0 +1,46 @@
+[ ] &&
+
+//not A->B
+//Basically compare A to zero and then compare -A to zero
+program_mem:
+		B B NEXT
+		A B notPos
+		B B done
+notPos: t0 t0 NEXT
+		B t0 NEXT
+		t1 t1 NEXT
+		t1 t0 zero
+		B B done
+zero: 	one B done
+done:	t2 t2 NEXT
+
+data_mem:
+	one: #1
+
+//logical OR A,B->C
+//Subtract the two and check if the result is zero
+program_mem:
+	C C NEXT
+	B C NEXT
+	A C ne
+	t0 t0 NEXT
+	t0 C ne
+	one C done
+ne:	C C NEXT
+done: t3 t3 NEXT
+
+data_mem:
+	one: #1
+
+
+//logical AND A,B->C
+//subtract the two and check if the result is zero
+program_mem:
+	C C NEXT
+	B C NEXT
+	A C false
+	t0 t0 NEXT
+	t0 C true
+false: C C done
+true: one C NEXT
+done: t0 t0 NEXT //dummy

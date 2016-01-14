@@ -1,0 +1,671 @@
+Identifiers
+High Level Structure
+        Module Structure
+        Linkage Types
+        Calling Conventions
+        Visibility Styles
+        DLL Storage Classes
+        Thread Local Storage Models
+        Structure Types
+        Global Variables
+        Functions
+        Aliases
+        Comdats
+        Named Metadata
+        Parameter Attributes
+        Garbage Collector Names
+        Prefix Data
+        Attribute Groups
+        Function Attributes
+        Module-Level Inline Assembly
+        Data Layout
+        Target Triple
+        Pointer Aliasing Rules
+        Volatile Memory Accesses
+        Memory Model for Concurrent Operations
+        Atomic Memory Ordering Constraints
+        Fast-Math Flags
+        Use-list Order Directives
+Type System
+        Void Type
+        Function Type
+        First Class Types
+        Single Value Types
+                Integer Type
+                Floating Point Types
+                X86_mmx Type
+                Pointer Type
+                Vector Type
+        Label Type
+        Metadata Type
+        Aggregate Types
+                Array Type
+                Structure Type
+                Opaque Structure Types
+Constants
+        Simple Constants
+        Complex Constants
+        Global Variable and Function Addresses
+        Undefined Values
+        Poison Values
+        Addresses of Basic Blocks
+        Constant Expressions
+Other Values
+        Inline Assembler Expressions
+                Inline Asm Metadata
+        Metadata Nodes and Metadata Strings
+                ‘tbaa‘ Metadata
+                ‘tbaa.struct‘ Metadata
+                ‘noalias‘ and ‘alias.scope‘ Metadata
+                ‘fpmath‘ Metadata
+                ‘range‘ Metadata
+                ‘llvm.loop‘
+                ‘llvm.loop.vectorize‘ and ‘llvm.loop.interleave‘
+                ‘llvm.loop.interleave.count‘ Metadata
+                ‘llvm.loop.vectorize.enable‘ Metadata
+                ‘llvm.loop.vectorize.width‘ Metadata
+                ‘llvm.loop.unroll‘
+                ‘llvm.loop.unroll.count‘ Metadata
+                ‘llvm.loop.unroll.disable‘ Metadata
+                ‘llvm.loop.unroll.full‘ Metadata
+                ‘llvm.mem‘
+                ‘llvm.mem.parallel_loop_access‘ Metadata
+Module Flags Metadata
+        Objective-C Garbage Collection Module Flags Metadata
+        Automatic Linker Flags Module Flags Metadata
+        C type width Module Flags Metadata
+Intrinsic Global Variables
+        The ‘llvm.used‘ Global Variable
+        The ‘llvm.compiler.used‘ Global Variable
+        The ‘llvm.global_ctors‘ Global Variable
+        The ‘llvm.global_dtors‘ Global Variable
+Instruction Reference
+        Terminator Instructions
+                ‘ret‘ Instruction        
+                ‘br‘ Instruction
+                ‘switch‘ Instruction
+                ‘indirectbr‘ Instruction      
+                ‘invoke‘ Instruction
+                ‘resume‘ Instruction
+                ‘unreachable‘ Instruction
+        Binary Operations
+                ‘add‘ Instruction
+                ‘fadd‘ Instruction
+                ‘sub‘ Instruction
+
+                ‘fsub‘ Instruction
+                ‘mul‘ Instruction
+                ‘fmul‘ Instruction
+                ‘udiv‘ Instruction
+                ‘sdiv‘ Instruction
+                ‘fdiv‘ Instruction
+                ‘urem‘ Instruction
+                ‘srem‘ Instruction
+                ‘frem‘ Instruction
+        Bitwise Binary Operations
+                ‘shl‘ Instruction
+                ‘lshr‘ Instruction
+                ‘ashr‘ Instruction
+                ‘and‘ Instruction
+                ‘or‘ Instruction
+                ‘xor‘ Instruction
+        Vector Operations
+                ‘extractelement‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘insertelement‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘shufflevector‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        Aggregate Operations
+                ‘extractvalue‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘insertvalue‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        Memory Access and Addressing Operations
+                ‘alloca‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘load‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Examples:
+                ‘store‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fence‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘cmpxchg‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘atomicrmw‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘getelementptr‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        Conversion Operations
+                ‘trunc .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘zext .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘sext .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fptrunc .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fpext .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fptoui .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fptosi .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘uitofp .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘sitofp .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘ptrtoint .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘inttoptr .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘bitcast .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘addrspacecast .. to‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        Other Operations
+                ‘icmp‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘fcmp‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘phi‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘select‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+                ‘call‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        ‘va_arg‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+        ‘landingpad‘ Instruction
+        Syntax:
+        Overview:
+        Arguments:
+        Semantics:
+        Example:
+Intrinsic Functions
+Variable Argument Handling Intrinsics
+‘llvm.va_start‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.va_end‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.va_copy‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Accurate Garbage Collection Intrinsics
+‘llvm.gcroot‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.gcread‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.gcwrite‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Code Generator Intrinsics
+‘llvm.returnaddress‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.frameaddress‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.read_register‘ and ‘llvm.write_register‘ Intrinsics
+Syntax:
+Overview:
+Semantics:
+‘llvm.stacksave‘ Intrinsic
+Syntax:
+Overview:
+Semantics:
+‘llvm.stackrestore‘ Intrinsic
+Syntax:
+Overview:
+Semantics:
+‘llvm.prefetch‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.pcmarker‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.readcyclecounter‘ Intrinsic
+Syntax:
+Overview:
+Semantics:
+‘llvm.clear_cache‘ Intrinsic
+Syntax:
+Overview:
+Semantics:
+Standard C Library Intrinsics
+‘llvm.memcpy‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.memmove‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.memset.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.sqrt.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.powi.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.sin.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.cos.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.pow.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.exp.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.exp2.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.log.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.log10.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.log2.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.fma.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.fabs.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.minnum.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.maxnum.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.copysign.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.floor.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.ceil.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.trunc.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.rint.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.nearbyint.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.round.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Bit Manipulation Intrinsics
+‘llvm.bswap.*‘ Intrinsics
+Syntax:
+Overview:
+Semantics:
+‘llvm.ctpop.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.ctlz.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.cttz.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Arithmetic with Overflow Intrinsics
+‘llvm.sadd.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.uadd.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.ssub.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.usub.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.smul.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.umul.with.overflow.*‘ Intrinsics
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+Specialised Arithmetic Intrinsics
+‘llvm.fmuladd.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+Half Precision Floating Point Intrinsics
+‘llvm.convert.to.fp16‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+‘llvm.convert.from.fp16‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Examples:
+Debugger Intrinsics
+Exception Handling Intrinsics
+Trampoline Intrinsics
+‘llvm.init.trampoline‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.adjust.trampoline‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Memory Use Markers
+‘llvm.lifetime.start‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.lifetime.end‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.invariant.start‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.invariant.end‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+General Intrinsics
+‘llvm.var.annotation‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.ptr.annotation.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.annotation.*‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.trap‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.debugtrap‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.stackprotector‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.stackprotectorcheck‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.objectsize‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.expect‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.assume‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+‘llvm.donothing‘ Intrinsic
+Syntax:
+Overview:
+Arguments:
+Semantics:
+Stack Map Intrinsics
